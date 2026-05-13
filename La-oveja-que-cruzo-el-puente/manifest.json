@@ -1,0 +1,25 @@
+{
+  "name": "La oveja que cruzó el puente",
+  "short_name": "Ovi",
+  "description": "Un cuento interactivo para niños",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#f8f8f0",
+  "theme_color": "#f8f8f0",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "imagenes/icono-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "imagenes/icono-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    }
+  ]
+}
