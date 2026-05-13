@@ -1,0 +1,25 @@
+{
+  "name": "La casa mágica y el calzón apestoso",
+  "short_name": "Casa",
+  "description": "Un cuento interactivo para niños",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#e4d9d1",
+  "theme_color": "#e4d9d1",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "imagenes/icono-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "imagenes/icono-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    }
+  ]
+}
