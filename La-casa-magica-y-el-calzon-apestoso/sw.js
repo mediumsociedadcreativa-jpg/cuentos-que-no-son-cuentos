@@ -32,6 +32,7 @@ const ARCHIVOS = [
   "./imagenes/boton-regresar.png",
   "./imagenes/boton-jugar.png",
   "./imagenes/boton-avanzar.png",
+  "./imagenes/boton-casita.png",
   "./imagenes/boton-comenzar.png",
   "./imagenes/fantasma-01.png",
   "./imagenes/fantasma-02.png",
