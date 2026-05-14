@@ -1,0 +1,292 @@
+/* =========================================
+   MI CUENTO — Estilos para niños 3-4 años
+   Control de plastilina + Fantasmita
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background: #e6f1fb;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   PANTALLA DE INICIO
+   ========================================= */
+#pantalla-inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  animation: fadeIn 1s ease;
+}
+
+#img-portada {
+  max-width: 380px;
+  width: 88vw;
+  border-radius: 20px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+}
+
+#btn-comenzar {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#btn-comenzar img {
+  width: 220px;
+  transition: transform 0.2s;
+}
+
+#btn-comenzar:hover img,
+#btn-comenzar:active img {
+  transform: scale(1.07);
+}
+
+/* =========================================
+   VISOR PRINCIPAL
+   ========================================= */
+#visor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  max-width: 700px;
+  position: relative;
+}
+
+/* =========================================
+   BARRA SUPERIOR DE PROGRESO
+   ========================================= */
+#barra-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.btn-inicio {
+  background: none;
+  border: none;
+  color: #f4c430;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-inicio:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+#barra-progreso {
+  flex: 1;
+  height: 8px;
+  background: rgba(128,128,128,0.12);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#progreso-fill {
+  height: 100%;
+  background: #f4c430;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+#contador-pagina {
+  font-size: 0.78rem;
+  color: rgba(48,48,48,0.4);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* =========================================
+   ÁREA DE ILUSTRACIÓN
+   ========================================= */
+#contenido-pagina {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px 8px;
+  overflow: hidden;
+  position: relative;
+  max-height: 90vh; /* ← limita el área total */
+}
+
+#imagen-pagina {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  object-fit: contain;
+  animation: slideIn 0.4s ease;
+}
+
+/* =========================================
+   FANTASMITA
+   ========================================= */
+#fantasmita {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+#fantasmita.visible {
+  opacity: 1;
+  animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%   { transform: translateY(0px);   }
+  50%  { transform: translateY(-12px); }
+  100% { transform: translateY(0px);   }
+}
+
+/* =========================================
+   ZONA DEL CONTROL DE PLASTILINA
+   ========================================= */
+#zona-control {
+  padding: 10px 16px 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#control-plastilina {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#fondo-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 14px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.btn-plastilina {
+  position: relative;
+  z-index: 2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 12px;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-plastilina img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.btn-plastilina:active {
+  transform: scale(0.88);
+}
+
+.btn-plastilina:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-plastilina:disabled:active {
+  transform: none;
+}
+
+/* =========================================
+   UTILIDADES
+   ========================================= */
+.oculto {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   RESPONSIVE — MÓVIL
+   ========================================= */
+@media (max-width: 480px) {
+  #control-plastilina {
+    height: 78px;
+    max-width: 360px;
+  }
+  .btn-plastilina {
+    width: 60px;
+    height: 60px;
+    margin: 0 8px;
+  }
+  #imagen-pagina {
+    border-radius: 12px;
+  }
+  #fantasmita {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 360px) {
+  #control-plastilina {
+    height: 68px;
+  }
+  .btn-plastilina {
+    width: 52px;
+    height: 52px;
+    margin: 0 6px;
+  }
+  #fantasmita {
+    width: 110px;
+    height: 110px;
+  }
+}
