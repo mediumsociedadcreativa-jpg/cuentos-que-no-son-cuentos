@@ -112,7 +112,7 @@ function reiniciar() {
   detenerFantasmita();
   document.getElementById("visor").classList.add("oculto");
   document.getElementById("pantalla-inicio").classList.remove("oculto");
-  window.location.href = "../index.html"; 
+  window.location.href = "../index.html";
 }
 
 // ------------------------------------------
