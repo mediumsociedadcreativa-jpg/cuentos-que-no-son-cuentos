@@ -230,10 +230,29 @@ self.addEventListener('activate', event => {
 // Fetch: red primero, si falla usa caché
 // Todo lo que se visita se guarda automáticamente
 self.addEventListener('fetch', event => {
+  const url = event.request.url;
+  
+  // Manejo especial para archivos de audio
+  if (url.endsWith('.mp3')) {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        if (cached) return cached;
+        return fetch(event.request).then(response => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // Para el resto de archivos
   event.respondWith(
     fetch(event.request)
       .then(response => {
-        // Si la respuesta es válida la guardamos en caché
         if (response && response.status === 200) {
           const responseClone = response.clone();
           caches.open(CACHE_NAME).then(cache => {
@@ -243,8 +262,8 @@ self.addEventListener('fetch', event => {
         return response;
       })
       .catch(() => {
-        // Sin internet, usa lo que está en caché
         return caches.match(event.request);
       })
   );
 });
+
