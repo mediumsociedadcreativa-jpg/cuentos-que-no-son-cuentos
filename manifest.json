@@ -1,0 +1,23 @@
+{
+  "name": "Cuentos que no son cuentos",
+  "short_name": "Cuentos",
+  "description": "Colección de 4 cuentos ilustrados con audio para niños",
+  "start_url": "/cuentos-que-no-son-cuentos/",
+  "display": "standalone",
+  "background_color": "#0d0d1a",
+  "theme_color": "#0d0d1a",
+  "orientation": "portrait",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "imagenes/icono-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    },
+    {
+      "src": "imagenes/icono-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ]
+}
