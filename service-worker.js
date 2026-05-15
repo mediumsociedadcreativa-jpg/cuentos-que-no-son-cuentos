@@ -206,13 +206,32 @@ const ARCHIVOS_ESENCIALES = [
 ];
 
 // Instalar: guarda archivos esenciales
+
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache =>
-      Promise.allSettled(
-        ARCHIVOS_ESENCIALES.map(url => cache.add(url).catch(e => console.warn('No se pudo cachear:', url)))
-      )
-    )
+    caches.open(CACHE_NAME).then(async cache => {
+      // Descargar audios forzando descarga completa
+      const audioArchivos = ARCHIVOS_ESENCIALES.filter(url => url.endsWith('.mp3'));
+      const otrosArchivos = ARCHIVOS_ESENCIALES.filter(url => !url.endsWith('.mp3'));
+
+      // Otros archivos normal
+      await Promise.allSettled(
+        otrosArchivos.map(url => cache.add(url).catch(e => console.warn('Falló:', url)))
+      );
+
+      // Audios con descarga forzada completa
+      await Promise.allSettled(
+        audioArchivos.map(url =>
+          fetch(new Request(url, { headers: { Range: 'bytes=0-' } }))
+            .then(response => {
+              if (response && (response.status === 200 || response.status === 206)) {
+                return cache.put(url, response);
+              }
+            })
+            .catch(e => console.warn('Audio falló:', url))
+        )
+      );
+    })
   );
   self.skipWaiting();
 });
