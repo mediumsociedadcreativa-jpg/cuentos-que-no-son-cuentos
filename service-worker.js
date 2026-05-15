@@ -229,41 +229,37 @@ self.addEventListener('activate', event => {
 
 // Fetch: red primero, si falla usa caché
 // Todo lo que se visita se guarda automáticamente
+
 self.addEventListener('fetch', event => {
   const url = event.request.url;
-  
-  // Manejo especial para archivos de audio
+
   if (url.endsWith('.mp3')) {
     event.respondWith(
       caches.match(event.request).then(cached => {
         if (cached) return cached;
-        return fetch(event.request).then(response => {
-          if (response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          }
-          return response;
-        });
+        return fetch(new Request(url, { headers: { Range: 'bytes=0-' } }))
+          .then(response => {
+            if (response && (response.status === 200 || response.status === 206)) {
+              const clone = response.clone();
+              caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+            }
+            return response;
+          });
       })
     );
     return;
   }
 
-  // Para el resto de archivos
   event.respondWith(
     fetch(event.request)
       .then(response => {
         if (response && response.status === 200) {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseClone);
-          });
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return response;
       })
-      .catch(() => {
-        return caches.match(event.request);
-      })
+      .catch(() => caches.match(event.request))
   );
 });
 
