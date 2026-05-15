@@ -7,6 +7,10 @@ const ARCHIVOS_ESENCIALES = [
   '/cuentos-que-no-son-cuentos/manifest.json',
   '/cuentos-que-no-son-cuentos/imagenes/icono-192.png',
   '/cuentos-que-no-son-cuentos/imagenes/icono-512.png',
+  '/cuentos-que-no-son-cuentos/imagenes/icono-la-casa.png',
+  '/cuentos-que-no-son-cuentos/imagenes/icono-la-oveja.png',
+  '/cuentos-que-no-son-cuentos/imagenes/icono-no-no-no.png',
+  '/cuentos-que-no-son-cuentos/imagenes/icono-toby-fantasmas.png',
 
   // Archivos — Toby y los fantasmas
   '/cuentos-que-no-son-cuentos/Toby-y-los-fantasmas/index.html',
