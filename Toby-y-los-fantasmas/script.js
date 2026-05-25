@@ -75,7 +75,7 @@ function mostrarPagina(indice) {
   audio.src = paginas[indice].audio;
   audio.load();
   audio.play().then(function () {
-    imgJugar.style.opacity = "0.75";
+    imgJugar.style.opacity = "0.30";
   }).catch(function () {
     imgJugar.style.opacity = "1";
   });
@@ -112,7 +112,7 @@ function reiniciar() {
   detenerFantasmita();
   document.getElementById("visor").classList.add("oculto");
   document.getElementById("pantalla-inicio").classList.remove("oculto");
-  window.location.href = "../index.html";
+  window.location.href = "../index.html"
 }
 
 // ------------------------------------------
@@ -121,7 +121,7 @@ function reiniciar() {
 function toggleAudio() {
   if (audio.paused) {
     audio.play();
-    imgJugar.style.opacity = "0.75";
+    imgJugar.style.opacity = "0.30";
   } else {
     audio.pause();
     imgJugar.style.opacity = "1";
