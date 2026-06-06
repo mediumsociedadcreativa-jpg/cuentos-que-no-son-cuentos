@@ -12,12 +12,12 @@
     {
       "src": "imagenes/icono-192.webp",
       "sizes": "192x192",
-      "type": "image/jpg"
+      "type": "image/web"
     },
     {
       "src": "imagenes/icono-512.webp",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/webp"
     }
   ]
 }
