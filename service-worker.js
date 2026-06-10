@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cuentos-v6'; // Subimos de versión para limpiar el caché anterior
+const CACHE_NAME = 'cuentos-v7'; // 👈 Al poner v7 obligamos al celular a descargar todo de nuevo
 
 // Rutas relativas unificadas
 const ARCHIVOS_ESENCIALES = [
@@ -11,6 +11,20 @@ const ARCHIVOS_ESENCIALES = [
   '/cuentos-que-no-son-cuentos/imagenes/icono-la-oveja.webp',
   '/cuentos-que-no-son-cuentos/imagenes/icono-no-no-no.webp',
   '/cuentos-que-no-son-cuentos/imagenes/icono-toby-fantasmas.webp',
+
+  // Audios del Menú Principal
+  '/cuentos-que-no-son-cuentos/audios/globo-pop.mp3',
+  '/cuentos-que-no-son-cuentos/audios/bienvenida.mp3',
+
+  // Audios de los Cuentos y Radios
+  '/cuentos-que-no-son-cuentos/audios/toby.mp3',
+  '/cuentos-que-no-son-cuentos/audios/cancion-toby.mp3',
+  '/cuentos-que-no-son-cuentos/audios/calzon.mp3',
+  '/cuentos-que-no-son-cuentos/audios/cancion-calzon.mp3',
+  '/cuentos-que-no-son-cuentos/audios/oveja.mp3',
+  '/cuentos-que-no-son-cuentos/audios/cancion-oveja.mp3',
+  '/cuentos-que-no-son-cuentos/audios/no.mp3',
+  '/cuentos-que-no-son-cuentos/audios/cancion-no.mp3',
 
   // Archivos — Toby y los fantasmas
   '/cuentos-que-no-son-cuentos/Toby-y-los-fantasmas/index.html',
