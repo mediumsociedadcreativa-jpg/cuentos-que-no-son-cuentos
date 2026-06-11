@@ -23,7 +23,7 @@ const paginasCuento = [
     audio: "audios/cuento-pag4.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
-    coordenadas: { top: "20%", left: "25%" }
+    coordenadas: { top: "60%", left: "25%" }
   },
   {
     imagen: "imagenes/pagina-05.webp",
