@@ -60,5 +60,25 @@
   <audio id="audio-efecto" src="audios/efecto-hoja.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Verificamos si viene del encadenador principal usando la sesión
+      if (sessionStorage.getItem('sesionIniciada') === 'true') {
+        
+        // Ocultamos la portada y mostramos el visor de inmediato
+        document.getElementById('pantalla-inicio').classList.add('oculto');
+        document.getElementById('visor').classList.remove('oculto');
+
+        // Modificamos la variable global de script.js para que apunte a la página 2 (índice 1)
+        paginaActual = 1; 
+
+        // Forzamos la carga de la página (esto actualiza imágenes, barra de progreso y arranca el audio)
+        if (typeof cargarPagina === "function") {
+          cargarPagina();
+        }
+      }
+    });
+  </script>
 </body>
 </html>
