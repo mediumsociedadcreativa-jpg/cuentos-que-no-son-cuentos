@@ -268,7 +268,7 @@
       intervaloCiclo = setInterval(() => {
         const personaje = infoAnimaciones[indiceActual];
         const elemento = document.querySelector(personaje.selector);
-        if (element) {
+        if (elemento) {
           elemento.classList.add(personaje.clase);
           setTimeout(() => { elemento.classList.remove(personaje.clase); }, 1000);
         }
