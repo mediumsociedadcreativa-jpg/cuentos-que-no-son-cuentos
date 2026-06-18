@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cuentos-v12'; // 👈 Forzamos la limpieza completa
+const CACHE_NAME = 'cuentos-v13'; // 👈 Forzamos la limpieza completa
 
 // Guardamos al inicio solo lo esencial y ligero para asegurar que la app se instale con éxito
 const ARCHIVOS_ESTATICOS = [
