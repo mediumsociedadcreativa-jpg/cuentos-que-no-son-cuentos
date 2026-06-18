@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cuentos-v17'; // Subimos de versión para forzar actualización completa en pruebas
+const CACHE_NAME = 'cuentos-v18'; // Subimos de versión para forzar actualización completa en pruebas
 
 // Guardamos TODO lo vital para que funcione 100% offline (Estructura + Gráficos + Audios de Entrada)
 const ARCHIVOS_ESTATICOS = [
@@ -99,67 +99,29 @@ self.addEventListener('fetch', event => {
           
           // Fabricamos una página web real directamente desde la memoria del Service Worker
           return new Response(`
+          
             <!DOCTYPE html>
             <html lang="es">
             <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <title>Cuento no disponible</title>
-              <style>
-                body {
-                  font-family: system-ui, -apple-system, sans-serif;
-                  background-color: #0d0d1a;
-                  color: #ffffff;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  height: 100vh;
-                  margin: 0;
-                  padding: 20px;
-                  text-align: center;
-                }
-                .contenedor-aviso {
-                  background: #16162a;
-                  max-width: 400px;
-                  padding: 35px 25px;
-                  border-radius: 30px;
-                  border: 2px solid #F0997B;
-                  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-                }
-                h2 {
-                  color: #f3ff37;
-                  font-size: 24px;
-                  margin-top: 0;
-                  margin-bottom: 15px;
-                }
-                p {
-                  color: #cdcaec;
-                  font-size: 16px;
-                  line-height: 1.5;
-                  margin-bottom: 25px;
-                }
-                .btn-volver {
-                  font-size: 18px;
-                  font-weight: bold;
-                  background-color: #3C3489;
-                  color: #ffffff;
-                  border: none;
-                  padding: 12px 35px;
-                  border-radius: 50px;
-                  cursor: pointer;
-                  text-decoration: none;
-                  display: inline-block;
-                }
-              </style>
             </head>
-            <body>
-              <div class="contenedor-aviso">
-                <h2>¡Falta descargar este cuento! 🎈</h2>
-                <p>Para poder escuchar esta historia en modo avión, necesitas abrirla al menos una vez mientras estés conectado a internet.</p>
-                <a href="/cuentos-que-no-son-cuentos/index.html" class="btn-volver">Volver al menú</a>
+            <body style="background-color: #0d0d1a; color: #ffffff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; padding: 20px; text-align: center;">
+              
+              <div style="max-width: 400px; padding: 20px; border: 1px solid #3C3489; border-radius: 15px;">
+                <h2 style="color: #f3ff37; font-size: 22px; margin-bottom: 15px;">¡Falta descargar este cuento! 🎈</h2>
+                <p style="color: #cdcaec; font-size: 16px; line-height: 1.5; margin-bottom: 25px;">
+                  Para poder escuchar esta historia en modo avión, necesitas abrirla al menos una vez mientras estés conectado a internet.
+                </p>
+                <a href="/cuentos-que-no-son-cuentos/index.html" style="background-color: #3C3489; color: #ffffff; text-decoration: none; padding: 10px 25px; border-radius: 20px; font-weight: bold; display: inline-block;">
+                  Volver al menú
+                </a>
               </div>
+
             </body>
             </html>
+            
           `, {
             headers: { 'Content-Type': 'text/html; charset=utf-8' }
           });
