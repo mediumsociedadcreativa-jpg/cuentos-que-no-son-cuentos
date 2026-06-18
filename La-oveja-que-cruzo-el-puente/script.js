@@ -2,84 +2,84 @@
 const paginasCuento = [
   {
     imagen: "imagenes/pagina-01.webp",
-    audio: "audios/cuento-pag1.mp3",
+    audio: "audios/oveja-pag1.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "25%", left: "25%" }
   },
   {
     imagen: "imagenes/pagina-02.webp",
-    audio: "audios/cuento-pag2.mp3",
+    audio: "audios/oveja-pag2.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "35%", left: "20%" }
   },
   {
     imagen: "imagenes/pagina-03.webp",
-    audio: "audios/cuento-pag3.mp3",
+    audio: "audios/oveja-pag3.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-asustado",
     coordenadas: { top: "25%", left: "20%" }
   },
   {
     imagen: "imagenes/pagina-04.webp",
-    audio: "audios/cuento-pag4.mp3",
+    audio: "audios/oveja-pag4.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "20%", left: "25%" }
   },
   {
     imagen: "imagenes/pagina-05.webp",
-    audio: "audios/cuento-pag5.mp3",
+    audio: "audios/oveja-pag5.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "50%", left: "50%" }
   },
   {
     imagen: "imagenes/pagina-06.webp",
-    audio: "audios/cuento-pag6.mp3",
+    audio: "audios/oveja-pag6.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "50%", left: "35%" }
   },
   {
     imagen: "imagenes/pagina-07.webp",
-    audio: "audios/cuento-pag7.mp3",
+    audio: "audios/oveja-pag7.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "20%", left: "15%" }
   },
   {
     imagen: "imagenes/pagina-08.webp",
-    audio: "audios/cuento-pag8.mp3",
+    audio: "audios/oveja-pag8.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-mareado",
     coordenadas: { top: "30%", left: "45%" }
   },
   {
     imagen: "imagenes/pagina-09.webp",
-    audio: "audios/cuento-pag9.mp3",
+    audio: "audios/oveja-pag9.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-asustado",
     coordenadas: { top: "40%", left: "15%" }
   },
   {
     imagen: "imagenes/pagina-10.webp",
-    audio: "audios/cuento-pag10.mp3",
+    audio: "audios/oveja-pag10.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "40%", left: "35%" }
   },
   {
     imagen: "imagenes/pagina-11.webp",
-    audio: "audios/cuento-pag11.mp3",
+    audio: "audios/oveja-pag11.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "40%", left: "15%" }
   },
   {
     imagen: "imagenes/pagina-12.webp",
-    audio: "audios/cuento-pag12.mp3",
+    audio: "audios/oveja-pag12.mp3",
     calzonSrc: "imagenes/calzon-flota.webp",
     postura: "postura-mareado",
     coordenadas: { top: "20%", left: "65%" }
