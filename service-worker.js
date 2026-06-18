@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cuentos-v13'; // Subimos de versión para forzar actualización completa en pruebas
+const CACHE_NAME = 'cuentos-v14'; // Subimos de versión para forzar actualización completa en pruebas
 
 // Guardamos TODO lo vital para que funcione 100% offline (Estructura + Gráficos + Audios de Entrada)
 const ARCHIVOS_ESTATICOS = [
