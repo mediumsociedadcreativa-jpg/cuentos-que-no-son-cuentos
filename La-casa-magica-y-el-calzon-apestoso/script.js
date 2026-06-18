@@ -2,116 +2,116 @@
 const paginasCuento = [
   {
     imagen: "imagenes/pagina-01.webp",
-    audio: "audios/cuento-pag1.mp3",
+    audio: "audios/casa-pag1.mp3",
   },
   {
     imagen: "imagenes/pagina-02.webp",
-    audio: "audios/cuento-pag2.mp3",
+    audio: "audios/casa-pag2.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "15%", left: "55%" }
   },
   {
     imagen: "imagenes/pagina-03.webp",
-    audio: "audios/cuento-pag3.mp3",
+    audio: "audios/casa-pag3.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-asustado",
     coordenadas: { top: "25%", left: "65%" }
   },
   {
     imagen: "imagenes/pagina-04.webp",
-    audio: "audios/cuento-pag4.mp3",
+    audio: "audios/casa-pag4.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "30%", left: "15%" }
   },
   {
     imagen: "imagenes/pagina-05.webp",
-    audio: "audios/cuento-pag5.mp3",
+    audio: "audios/casa-pag5.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "70%", left: "50%" }
   },
   {
     imagen: "imagenes/pagina-06.webp",
-    audio: "audios/cuento-pag6.mp3",
+    audio: "audios/casa-pag6.mp3",
     calzonSrc: "imagenes/calzon-flota.webp",
     postura: "postura-mareado",
     coordenadas: { top: "40%", left: "15%" }
   },
   {
     imagen: "imagenes/pagina-07.webp",
-    audio: "audios/cuento-pag7.mp3",
+    audio: "audios/casa-pag7.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "17%", left: "45%" }
   },
   {
     imagen: "imagenes/pagina-08.webp",
-    audio: "audios/cuento-pag8.mp3",
+    audio: "audios/casa-pag8.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "40%", left: "15%" }
   },
   {
     imagen: "imagenes/pagina-09.webp",
-    audio: "audios/cuento-pag9.mp3",
+    audio: "audios/casa-pag9.mp3",
     calzonSrc: "imagenes/calzon-flota.webp",
     postura: "postura-asustado",
     coordenadas: { top: "38%", left: "50%" }
   },
   {
     imagen: "imagenes/pagina-10.webp",
-    audio: "audios/cuento-pag10.mp3",
+    audio: "audios/casa-pag10.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "40%", left: "15%" }
   },
   {
     imagen: "imagenes/pagina-11.webp",
-    audio: "audios/cuento-pag11.mp3",
+    audio: "audios/casa-pag11.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "55%", left: "25%" }
   },
   {
     imagen: "imagenes/pagina-12.webp",
-    audio: "audios/cuento-pag12.mp3",
+    audio: "audios/casa-pag12.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "30%", left: "75%" }
   },
   {
     imagen: "imagenes/pagina-13.webp",
-    audio: "audios/cuento-pag13.mp3",
+    audio: "audios/casa-pag13.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "60%", left: "45%" }
   },
   {
     imagen: "imagenes/pagina-14.webp",
-    audio: "audios/cuento-pag14.mp3",
+    audio: "audios/casa-pag14.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "55%", left: "65%" }
   },
   {
     imagen: "imagenes/pagina-15.webp",
-    audio: "audios/cuento-pag15.mp3",
+    audio: "audios/casa-pag15.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-flotar",
     coordenadas: { top: "35%", left: "45%" }
   },
   {
     imagen: "imagenes/pagina-16.webp",
-    audio: "audios/cuento-pag16.mp3",
+    audio: "audios/casa-pag16.mp3",
     calzonSrc: "imagenes/calzon-mareado.webp",
     postura: "postura-mareado",
     coordenadas: { top: "30%", left: "35%" }
   },
   {
     imagen: "imagenes/pagina-17.webp",
-    audio: "audios/cuento-pag17.mp3",
+    audio: "audios/casa-pag17.mp3",
     calzonSrc: "imagenes/calzon-normal.webp",
     postura: "postura-asustado",
     coordenadas: { top: "20%", left: "65%" }
