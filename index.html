@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Aplicación infantil de audio cuentos ilustrados. Un espacio libre de publicidad, libre de internet. Especialmente para la seguridad de niños de 3 años.">
+  <title>Cuentos que no son cuentos</title>
+  
+  <link rel="manifest" href="/cuentos-que-no-son-cuentos/manifest.json">
+  <meta name="theme-color" content="#0d0d1a">
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/cuentos-que-no-son-cuentos/service-worker.js')
+        .then(reg => console.log('Guardador offline multimedia activo', reg))
+        .catch(err => console.error('Error al registrar el guardador', err));
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple-bg: #EEEDFE;
+      --purple-title: #3C3489;
+      --purple-tag-bg: #AFA9EC;
+      --purple-tag-text: #26215C;
+      --orange-bg: #FAECE7;
+      --orange-title: #712B13;
+      --orange-tag-bg: #F0997B;
+      --orange-tag-text: #4A1B0C;
+      --green-bg: #EAF3DE;
+      --green-title: #27500A;
+      --green-tag-bg: #97C459;
+      --green-tag-text: #173404;
+      --blue-bg: #E6F1FB;
+      --blue-title: #0C447C;
+      --blue-tag-bg: #85B7EB;
+      --blue-tag-text: #042C53;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #0d0d1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    /* PANTALLA DE BLOQUEO DE SEGURIDAD */
+    #pantalla-bloqueo {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #0d0d1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 10000;
+    }
+
+    .contenedor-bloqueo {
+      background: #16162a;
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 25px;
+      border-radius: 30px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      text-align: center;
+      border: 2px solid #3C3489;
+    }
+
+    .bloqueo-header h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 26px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .bloqueo-subtitulo {
+      font-size: 14px;
+      color: #f3ff37;
+      font-style: italic;
+      margin-bottom: 25px;
+    }
+
+    .bloqueo-cuerpo p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #cdcaec;
+      margin-bottom: 25px;
+    }
+
+    .formulario-codigo {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    #input-codigo {
+      width: 100%;
+      padding: 16px;
+      font-size: 16px;
+      border: 2px solid #3C3489;
+      background: #0d0d1a;
+      color: #ffffff;
+      border-radius: 50px;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 2px;
+      outline: none;
+    }
+
+    #input-codigo:focus { border-color: #f3ff37; }
+
+    #boton-verificar {
+      width: 100%;
+      padding: 16px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 18px;
+      font-weight: 800;
+      background-color: #3C3489;
+      color: #ffffff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    .mensaje-error {
+      color: #F0997B;
+      font-size: 14px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .bloqueo-footer {
+      margin-top: 15px;
+      border-top: 1px solid #26215C;
+      padding-top: 20px;
+      font-size: 13px;
+      color: #a09bd8;
+    }
+
+    /* ======================================================== */
+    /* NUEVA PANTALLA DE CARA (BOLITA INTERACTIVA)              */
+    /* ======================================================== */
+    #pantalla-carga {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #0d0d1a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 10005;
+    }
+
+    .bolita-girando {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #16162a;
+      border-top: 6px solid #f3ff37;
+      border-radius: 50%;
+      animation: girarBolita 1s linear infinite;
+    }
+
+    .texto-carga {
+      font-family: 'Baloo 2', cursive;
+      color: #ffffff;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    @keyframes girarBolita {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* PANTALLA DE ENTRADA MÁGICA DE LA APP */
+    #pantalla-entrada {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #0d0d1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .btn-comenzar {
+      font-family: 'Baloo 2', cursive;
+      font-size: 28px;
+      font-weight: 800;
+      color: #0d0d1a;
+      background: #f3ff37;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 50px;
+      cursor: pointer;
+      animation: pulsoBoton 1.5s infinite;
+    }
+
+    @keyframes pulsoBoton {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .wrapper { text-align: center; width: 100%; max-width: 560px; }
+    .estrellas { font-size: 22px; letter-spacing: 6px; color: #a09bd8; margin-bottom: 1rem; }
+    h1 { font-family: 'Baloo 2', cursive; font-size: clamp(28px, 6vw, 42px); font-weight: 800; color: #ffffff; line-height: 1.15; margin-bottom: 0.4rem; }
+    .subtitulo { font-size: 19px; color: #f3ff37; margin-bottom: 2.5rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .card {
+      border-radius: 20px; padding: 2.2rem 1.25rem 1.5rem; cursor: pointer; text-decoration: none;
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 10px;
+      position: relative; -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-radio-tarjeta { position: absolute; top: 12px; right: 12px; width: 66px; height: 66px; cursor: pointer; z-index: 10; transition: transform 0.2s ease; }
+    .btn-radio-tarjeta:hover { transform: scale(1.15); }
+    .radio-bailando { animation: radioBaile 0.6s ease-in-out infinite; }
+
+    @keyframes radioBaile {
+      0%, 100% { transform: rotate(0deg) scale(1.1); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+    }
+
+    .card-icon { font-size: 50px; line-height: 1; display: inline-block; margin-top: 5px; }
+    .card-icon img { max-width: 150px; height: auto; display: block; }
+    .card-title { font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 600; line-height: 1.2; }
+    .card-tag { font-size: 14px; font-weight: 800; padding: 4px 14px; border-radius: 20px; margin-top: auto; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .card-purple { background: var(--purple-bg); }
+    .card-purple .card-title { color: var(--purple-title); }
+    .card-purple .card-tag { background: var(--purple-tag-bg); color: var(--purple-tag-text); }
+    .card-orange { background: var(--orange-bg); }
+    .card-orange .card-title { color: var(--orange-title); }
+    .card-orange .card-tag { background: var(--orange-tag-bg); color: var(--orange-tag-text); }
+    .card-green { background: var(--green-bg); }
+    .card-green .card-title { color: var(--green-title); }
+    .card-green .card-tag { background: var(--green-tag-bg); color: var(--green-tag-text); }
+    .card-blue { background: var(--blue-bg); }
+    .card-blue .card-title { color: var(--blue-title); }
+    .card-blue .card-tag { background: var(--blue-tag-bg); color: var(--blue-tag-text); }
+
+    .animar-toby { animation: temblarMiedo 0.4s ease-in-out 2; }
+    @keyframes temblarMiedo { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-4px) rotate(-2deg); } 40%, 80% { transform: translateX(4px) rotate(2deg); } }
+    .animar-calzon { transform-origin: top center; animation: balanceoComico 0.5s ease-in-out 1; }
+    @keyframes balanceoComico { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(15deg) scale(1.1); } 60% { transform: rotate(-15deg) scale(1.1); } }
+    .animar-oveja { animation: brincoAlegre 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1; }
+    @keyframes brincoAgre { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scaleY(1.1) scaleX(0.9); } }
+    .animar-no { animation: vueltaEmocion 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1; }
+    @keyframes vueltaEmocion { 0% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(10deg); } 100% { transform: scale(1) rotate(0deg); } }
+
+    @media (max-width: 420px) {
+      .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .card { padding: 1.5rem 0.6rem 1rem; min-height: 190px; }
+      .btn-radio-tarjeta { width: 30px; height: 30px; top: 8px; right: 8px; }
+      .card-icon img { max-width: 55px; }
+      .card-title { font-size: 15px; }
+      .card-tag { font-size: 11px; padding: 2px 8px; }
+    }
+
+    #globo-sorpresa {
+      position: absolute; top: 15%; left: 75%; width: 80px; cursor: pointer;
+      animation: flotarGlobo 3s ease-in-out infinite; z-index: 10;
+    }
+    @keyframes flotarGlobo { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
+    #globo-sorpresa.explotado { transform: scale(0); opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div id="pantalla-carga" style="display: none;">
+    <div class="bolita-girando"></div>
+    <p class="texto-carga">Abriendo el baúl de historias...</p>
+  </div>
+
+  <div id="pantalla-bloqueo" style="display: none;">
+    <div class="contenedor-bloqueo">
+      <header class="bloqueo-header">
+        <h2>Cuentos que no son cuentos</h2>
+        <p class="bloqueo-subtitulo">Un espacio seguro y con alma</p>
+      </header>
+      <main class="bloqueo-cuerpo">
+        <p>Para abrir este baúl de historias libres de publicidad y guardar todo el contenido en tu celular, ingresa tu código de activación.</p>
+        <div class="formulario-codigo">
+          <input type="text" id="input-codigo" placeholder="ESCRIBE TU CÓDIGO AQUÍ" autocomplete="off" autocapitalize="characters">
+          <button id="boton-verificar">Activar Aplicación</button>
+        </div>
+        <p id="mensaje-error" class="mensaje-error"></p>
+      </main>
+      <footer class="bloqueo-footer">
+        <p>¿Aún no tienes un código o necesitas ayuda? <br>Contáctame directamente para adquirir el tuyo.</p>
+      </footer>
+    </div>
+  </div>
+
+  <div id="pantalla-entrada">
+    <h1 style="margin-bottom: 2rem;">¡Estás listo!</h1>
+    <div id="globo-sorpresa" onclick="reventarGlobo()" aria-label="Globo de plastilina secreto">
+      <img src="imagenes/globo-plastilina.webp" alt="Globo 3D">
+    </div>
+    <audio id="audio-pop" src="audios/globo-pop.mp3"></audio>
+    <button class="btn-comenzar" onclick="intentarAcceso()">¡A JUGAR! 🎈</button>
+  </div>
+
+<div class="wrapper">
+    <h1>Cuentos que no<br>son cuentos</h1>
+    <p class="subtitulo">Elige tu aventura</p>
+    <div class="estrellas">⭐️ ⭐️ ⭐️</div>
+   <div class="grid">
+     <!-- 1. TOBY Y LOS FANTASMAS -->
+     <a class="card card-purple" href="Toby-y-los-fantasmas/index.html?saltarPortada=true" data-animacion="animar-toby" data-audio="/cuentos-que-no-son-cuentos/audios/toby.mp3">
+       <img src="imagenes/radio.webp" class="btn-radio-tarjeta" data-cancion="/cuentos-que-no-son-cuentos/audios/cancion-toby.mp3" alt="Radio Música">
+       <div class="card-icon"><img src="imagenes/icono-toby-fantasmas.webp" alt="Cuento Misterio"></div>
+       <div class="card-title">Toby y los fantasmas</div>
+       <div class="card-tag">Misterio</div>
+     </a>
+    <!-- 2. LA CASA MÁGICA -->
+    <a class="card card-orange" href="La-casa-magica-y-el-calzon-apestoso/index.html?saltarPortada=true" data-animacion="animar-calzon" data-audio="/cuentos-que-no-son-cuentos/audios/calzon.mp3">
+      <img src="imagenes/radio.webp" class="btn-radio-tarjeta" data-cancion="/cuentos-que-no-son-cuentos/audios/cancion-calzon.mp3" alt="Radio Música">
+      <div class="card-icon"><img src="imagenes/icono-la-casa.webp" alt="Cuento Humor"></div>
+      <div class="card-title">La casa mágica y el calzón apestoso</div>
+      <div class="card-tag">Humor</div>
+    </a>
+    <!-- 3. LA OVEJA QUE CRUZÓ EL PUENTE -->
+    <a class="card card-green" href="La-oveja-que-cruzo-el-puente/index.html?saltarPortada=true" data-animacion="animar-oveja" data-audio="/cuentos-que-no-son-cuentos/audios/oveja.mp3">
+      <img src="imagenes/radio.webp" class="btn-radio-tarjeta" data-cancion="/cuentos-que-no-son-cuentos/audios/cancion-oveja.mp3" alt="Radio Música">
+      <div class="card-icon"><img src="imagenes/icono-la-oveja.webp" alt="Cuento Aventura"></div>
+      <div class="card-title">La oveja que cruzó el puente</div>
+      <div class="card-tag">Aventura</div>
+    </a>
+    <!-- 4. ÑO, ÑO, ÑO, Y TODO CAMBIÓ -->
+    <a class="card card-blue" href="No-no-no-y-todo-cambio/index.html?saltarPortada=true" data-animacion="animar-no" data-audio="/cuentos-que-no-son-cuentos/audios/no.mp3">
+      <img src="imagenes/radio.webp" class="btn-radio-tarjeta" data-cancion="/cuentos-que-no-son-cuentos/audios/cancion-no.mp3" alt="Radio Música">
+      <div class="card-icon"><img src="imagenes/icono-no-no-no.webp" alt="Cuento Emoción"></div>
+      <div class="card-title">Ño, ño, ño, y todo cambió</div>
+      <div class="card-tag">Emoción</div>
+    </a>
+   </div>
+</div>
+
+  <audio id="reproductor-app" preload="auto"></audio>
+  <audio id="audio-bienvenida" src="/cuentos-que-no-son-cuentos/audios/bienvenida.mp3" preload="auto"></audio>
+  <audio id="audio-radio-compartido" preload="auto"></audio>
+
+  <script>
+    const codigosAutorizados = ["LUNA33", "RIO29", "SOL777", "CUENTO59", "ALMA144", "PAZ99", "FLOR74", "NUBE444", "MAR888", "TIERRA1"];
+    
+    const divBloqueo = document.getElementById('pantalla-bloqueo');
+    const divCarga = document.getElementById('pantalla-carga');
+    const divEntrada = document.getElementById('pantalla-entrada');
+    const inputCodigo = document.getElementById('input-codigo');
+    const btnVerificar = document.getElementById('boton-verificar');
+    const txtError = document.getElementById('mensaje-error');
+
+    // ==========================================
+    // LOGICA DE CONTROL DE FLUJO AL INICIAR
+    // ==========================================
+    document.addEventListener("DOMContentLoaded", () => {
+      // Si ya inició sesión antes en esta misma pestaña/visita, vamos directo al menú
+      if (sessionStorage.getItem('sesionIniciada') === 'true') {
+        divEntrada.style.display = 'none';
+        iniciarCicloAutomatico();
+      }
+    });
+
+    function intentarAcceso() {
+      if (localStorage.getItem('appActivada') === 'true') {
+        divCarga.style.display = 'flex';
+        setTimeout(() => {
+          divCarga.style.display = 'none';
+          comenzarExperiencia();
+        }, 3000);
+      } else {
+        divBloqueo.style.display = 'flex';
+        inputCodigo.focus();
+      }
+    }
+
+    btnVerificar.addEventListener('click', procesarValidacion);
+    inputCodigo.addEventListener('keypress', (e) => { if (e.key === 'Enter') procesarValidacion(); });
+
+    function procesarValidacion() {
+      const intento = inputCodigo.value.trim().toUpperCase();
+      if (intento === "") { txtError.innerText = "Por favor, escribe un código."; return; }
+
+      if (codigosAutorizados.includes(intento)) {
+        localStorage.setItem('appActivada', 'true');
+        divBloqueo.style.display = 'none';
+        
+        divCarga.style.display = 'flex';
+        setTimeout(() => {
+          divCarga.style.display = 'none';
+          comenzarExperiencia();
+        }, 8000);
+      } else {
+        txtError.innerText = "Código no válido. Por favor, verifica con la autora.";
+        inputCodigo.value = ""; inputCodigo.focus();
+      }
+    }
+
+    function reventarGlobo() {
+      const globo = document.getElementById('globo-sorpresa');
+      const audioPop = document.getElementById('audio-pop');
+      if (globo && audioPop && !globo.classList.contains('explotado')) {
+        audioPop.play().catch(e => console.log("Audio bloqueado"));
+        globo.classList.add('explotado');
+        const nuevoTop = Math.floor(Math.random() * 60) + 10;   
+        const nuevoLeft = Math.floor(Math.random() * 70) + 10;  
+        setTimeout(() => {
+          globo.style.top = `${nuevoTop}%`; globo.style.left = `${nuevoLeft}%`;
+          globo.classList.remove('explotated');
+          globo.classList.remove('explotado');
+        }, 800); 
+      }
+    }
+
+    const tarjetas = document.querySelectorAll('.card');  
+    const radios = document.querySelectorAll('.btn-radio-tarjeta');
+    const reproductor = document.getElementById('reproductor-app');
+    const audioBienvenida = document.getElementById('audio-bienvenida');
+    const audioRadio = document.getElementById('audio-radio-compartido');
+
+    const infoAnimaciones = [
+      { selector: '.card-purple .card-icon', clase: 'animar-toby' },
+      { selector: '.card-orange .card-icon', clase: 'animar-calzon' },
+      { selector: '.card-green .card-icon', clase: 'animar-oveja' },
+      { selector: '.card-blue .card-icon', clase: 'animar-no' }
+    ];
+    
+    let indiceActual = 0; let intervaloCiclo; let temporizadorRadio;
+
+    function comenzarExperiencia() {
+      // Guardamos en la sesión actual que ya entramos por primera vez
+      sessionStorage.setItem('sesionIniciada', 'true');
+      
+      divEntrada.style.opacity = '0'; 
+      divEntrada.style.visibility = 'hidden';
+      
+      if (audioBienvenida) audioBienvenida.play().catch(e => console.log("Audio libre"));
+      iniciarCicloAutomatico();
+    }
+
+    function iniciarCicloAutomatico() {
+      // Evitamos duplicar intervalos si el script vuelve a ejecutarse
+      clearInterval(intervaloCiclo);
+      intervaloCiclo = setInterval(() => {
+        const personaje = infoAnimaciones[indiceActual];
+        const elemento = document.querySelector(personaje.selector);
+        if (elemento) {
+          elemento.classList.add(personaje.clase);
+          setTimeout(() => { elemento.classList.remove(personaje.clase); }, 1000);
+        }
+        indiceActual = (indiceActual + 1) % infoAnimaciones.length;
+      }, 2500); 
+    }
+
+    radios.forEach(radio => {
+      radio.addEventListener('click', function(evento) {
+        evento.stopPropagation(); evento.preventDefault();
+        const rutaCancion = this.getAttribute('data-cancion');
+        audioRadio.pause(); clearTimeout(temporizadorRadio);
+        radios.forEach(r => r.classList.remove('radio-bailando'));
+        if (audioBienvenida) audioBienvenida.pause();
+        audioRadio.src = rutaCancion; audioRadio.load();
+        audioRadio.play().catch(e => console.log("Música activa"));
+        this.classList.add('radio-bailando');
+        temporizadorRadio = setTimeout(() => { audioRadio.pause(); this.classList.remove('radio-bailando'); }, 45000);
+      });
+    });
+
+    tarjetas.forEach(tarjeta => {
+      tarjeta.addEventListener('click', function(evento) {
+        evento.preventDefault(); clearInterval(intervaloCiclo); clearTimeout(temporizadorRadio);
+        if (audioBienvenida) audioBienvenida.pause(); audioRadio.pause();
+        radios.forEach(r => r.classList.remove('radio-bailando'));
+        
+        const destino = this.getAttribute('href');
+        const nombreAnimacion = this.getAttribute('data-animacion');
+        const rutaAudio = this.getAttribute('data-audio');
+        const contenedorIcono = this.querySelector('.card-icon');
+
+        document.querySelectorAll('.card-icon').forEach(icon => { icon.className = 'card-icon'; });
+        if (contenedorIcono && nombreAnimacion) contenedorIcono.classList.add(nombreAnimacion);
+
+        setTimeout(() => {
+          if (rutaAudio && reproductor) {
+            reproductor.src = rutaAudio; reproductor.load();
+            reproductor.play().catch(e => console.log("Error audio:", e));
+          }
+        }, 50); 
+        setTimeout(() => { window.location.href = destino; }, 6000); 
+      });
+    });
+  </script>
+</body>
+</html>
