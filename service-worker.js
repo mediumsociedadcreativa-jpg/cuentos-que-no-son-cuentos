@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cuentos-v9'; // 👈 Al poner v7 obligamos al celular a descargar todo de nuevo
+const CACHE_NAME = 'cuentos-v10'; // 👈 Al poner v7 obligamos al celular a descargar todo de nuevo
 
 // Rutas relativas unificadas
 const ARCHIVOS_ESENCIALES = [
