@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>No no no y todo cambió</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- PORTADA DEL CUENTO -->
+  <div id="pantalla-inicio">
+    <img src="imagenes/pagina-01.webp" alt="Portada" id="img-portada">
+    <button id="btn-comenzar" onclick="comenzar()">
+      <img src="imagenes/boton-comenzar.webp" alt="Comenzar">
+    </button>
+  </div>
+
+  <!-- VISOR DE PÁGINAS -->
+  <div id="visor" class="oculto">
+
+    <!-- BARRA SUPERIOR DE PROGRESO -->
+    <div id="barra-top">
+      <button class="btn-inicio" onclick="regresarAlMenu()" title="Volver al menú">
+        <img src="imagenes/boton-casita.webp" alt="Menú principal">
+      </button>
+      <div id="barra-progreso">
+        <div id="progreso-fill"></div>
+      </div>
+      <span id="contador-pagina">1 / 16</span>
+    </div>
+
+    <!-- CONTENIDO DE LA ILUSTRACIÓN Y PERSONAJE -->
+    <div id="contenido-pagina">
+      <img id="imagen-pagina" src="" alt="Ilustración del cuento">
+      <img id="calzon-personaje" src="" alt="Personaje" class="oculto">
+    </div>
+
+    <!-- CONTROLES ESTILO PLASTILINA -->
+    <div id="zona-control">
+      <div id="control-plastilina">
+        <img src="imagenes/fondo-control.webp" alt="" id="fondo-control">
+
+        <button class="btn-plastilina" id="btn-regresar" onclick="paginaAnterior()" aria-label="Página anterior">
+          <img src="imagenes/boton-regresar.webp" alt="Regresar">
+        </button>
+
+        <button class="btn-plastilina" id="btn-jugar" onclick="toggleAudio()" aria-label="Reproducir / Pausar">
+          <img src="imagenes/boton-jugar.webp" alt="Jugar" id="img-jugar">
+        </button>
+        <button class="btn-plastilina" id="btn-avanzar" onclick="paginaSiguiente()" aria-label="Página siguiente">
+          <img src="imagenes/boton-avanzar.webp" alt="Avanzar">
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ELEMENTOS DE AUDIO -->
+  <audio id="audio-cuento" src=""></audio>
+  <!-- CORREGIDO: Añadida la 'b' que faltaba en 'todo-cambio' -->
+  <audio id="audio-efecto" src="/cuentos-que-no-son-cuentos/no-no-no-y-todo-cambio/audios/efecto-hoja.mp3" preload="auto"></audio>
+
+  <!-- CONTROL PRINCIPAL DE LA APP -->
+  <script src="script.js"></script>
+
+</body>
+</html>
